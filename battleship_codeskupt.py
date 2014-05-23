@@ -1,4 +1,4 @@
-#Battleship from CodeAcademy
+#Battleship idea from CodeAcademy implemented in CodeSkupltor
 
 #Global calls
 import random, simplegui
