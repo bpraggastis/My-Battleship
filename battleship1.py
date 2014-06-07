@@ -1,5 +1,8 @@
 # # B's Battle Ship
 
+############################################
+#This version is broken! Do not run
+
 
 # Import appropriate modules , initialize program, and set constants
 import pygame
@@ -11,7 +14,7 @@ import math
 pygame.init()
 pygame.font.init()
 canvas_size = (1024,768) # canvas will be resizable
-canvas_center = [int(canvas_size[0]/2),int(canvas_size[1]/2)]
+center = [int(canvas_size[0]/2),int(canvas_size[1]/2)]
 
 running = True
 select = False
@@ -56,7 +59,7 @@ class RectShip:
         specs = "Position (" + str(self.pos[0]) + "," + str(self.pos[1]) + ")"
         return specs
         
-    def draw_rect(self,color=WHITE)
+    def draw_rect(self,color=WHITE):
         [h,k] = self.pos
         list = [[h-150,k - 150],[h+150,k-150],[h+150,k+150],[h-150,k+150]]      
         pygame.draw.polygon(canvas,color,list,1)
@@ -82,35 +85,36 @@ def findevent():
     
     for event in list(pygame.event.get()):
         if event.type == pygame.QUIT: # Close window or hit 'x' to quit the program
-            running == False
+            running = False
             pygame.quit()
             sys.exit(0)
         if  event.type == pygame.KEYDOWN:
             if event.key == K_x:
-                running == False
+                running = False
                 pygame.quit()
                 sys.exit(0)    
                 
         if event.type==VIDEORESIZE:    # Drag to resize the screen
             canvas_size = event.dict['size']
          
-        if event.type == MOUSEBUTTONDOWN and dist(cursor_pos,circ.pos) < circ. rad: # Turn on mouse to move circle
+        if select == False and event.type == MOUSEBUTTONDOWN and dist(new_cursor_pos,circ.pos) < circ. rad: # Turn on mouse to move circle
             select = True
             circ.color = RED
-            move_pos = [0,0]
-            for i in range(0,2):
-                move_pos[i] = new_cursor_pos[i] - cursor_pos[i]
-                circ.pos[i] += move_pos[i]
             cursor_pos = new_cursor_pos
-            canvas=pygame.display.set_mode(canvas_size,HWSURFACE|DOUBLEBUF|RESIZABLE)
-            canvas.fill(BLUE)
-            center = [int(canvas_size[0]/2),int(canvas_size[1]/2)]
-            [h,k] = center
-            message = "center is [" + str(h) + ", " + str(k) + "]"
-            rect = [[h-150,k - 150],[h+150,k-150],[h+150,k+150],[h-150,k+150]]      
-            pygame.draw.polygon(canvas,WHITE,rect,1)
-            circ.draw_circle(circ.color)
-            canvas.blit(text(message),(50,50))  
+            # move_pos = [0,0]
+            # for i in range(0,2):
+                # move_pos[i] = new_cursor_pos[i] - cursor_pos[i]
+                # circ.pos[i] += move_pos[i]
+            # cursor_pos = new_cursor_pos
+            #canvas=pygame.display.set_mode(canvas_size,DOUBLEBUF|RESIZABLE)
+            #canvas.fill(BLUE)
+            #center = [int(canvas_size[0]/2),int(canvas_size[1]/2)]
+            #[h,k] = center
+            #message = "center is [" + str(h) + ", " + str(k) + "]"
+            #rect = [[h-150,k - 150],[h+150,k-150],[h+150,k+150],[h-150,k+150]]      
+            #pygame.draw.polygon(canvas,WHITE,rect,1)
+            #circ.draw_circle(circ.color)
+             
                     
         if event.type == MOUSEBUTTONUP:
             circ.color = WHITE
@@ -122,12 +126,14 @@ def draw_handler():
     global circ, canvas, select, cursor_pos, canvas_size
     if select == True:    
         move_pos = [0,0]
+        # cir.color = RED
         new_cursor_pos = pygame.mouse.get_pos()
         for i in range(0,2):
             move_pos[i] = new_cursor_pos[i] - cursor_pos[i]
             circ.pos[i] += move_pos[i]
         cursor_pos = new_cursor_pos
-    canvas=pygame.display.set_mode(canvas_size,HWSURFACE|DOUBLEBUF|RESIZABLE)
+    
+    canvas=pygame.display.set_mode(canvas_size,DOUBLEBUF|RESIZABLE)    
     canvas.fill(BLUE)
     center = [int(canvas_size[0]/2),int(canvas_size[1]/2)]
     [h,k] = center
@@ -152,7 +158,7 @@ circ = CircleShip(center,100)
 circ.draw_circle(WHITE)
 rect = [ctr,[ctr[0]+300,ctr[1]],[ctr[0]+300,ctr[1]+300],[ctr[0],ctr[1]+300] ]
 pygame.draw.polygon(canvas,WHITE,rect,1)
-cursor_pos = pygame.mouse.get_pos()
+# cursor_pos = pygame.mouse.get_pos()
 
 
 
