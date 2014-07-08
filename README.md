@@ -8,3 +8,5 @@ Simple Battle Ship Game
 6/8  The latest version, battleship5 has 5 ships randomly created for the computer player, these are visible for editing purposes and will be invisible in the final version. The player must drag and drop his ships into the friendly waters, using the space bar to change the orientation of ships. 
 
 Still to come: prevent the ships from going beyond the screen. Once the ships are in place the screen should change so that combat can begin. I intend to have the player fire on a location by clicking on a square. Players will take turns and the computer will systematically sweep the board starting at a random square and cycling around a hit until the corresponding ships in the vicinity are sunk.
+
+7/8 Rewrote to better encapsulate modules. I am still calling fields outside of a class...got to stop it.  Game now checks when the player has moved all ships into friendly waters and creates opening for game play to begin. Next need to create play algorithm for computer, turns, score keeping, and user interface so that clicks will show as hits and misses.
