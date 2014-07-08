@@ -51,6 +51,10 @@ def text(string, font = sf, color = WHITE):
 # Class Definitions 
 
 class Ship:  
+    """
+    Ship class defines a single ship. It requires a starting position, a color, and an orientation 0 = horizontal and 1 = vertical
+    """
+    
     def __init__(self,length,berth_pos, color = WHITE,orientation = 0):
         self.berth_pos = berth_pos #location of the helm in pixels ############################### change this to reference the grid
         self.helm_pos = list(berth_pos) 
@@ -64,16 +68,16 @@ class Ship:
          
         print("ship coord = ",self.coord)
              
-    def rect(self):  #generates the rectangular representation of the ship
+    def rect(self):  # returns a rectangular representation of the ship
         o = self.orientation
         g = GRID_SIZE
         return Rect(self.helm_pos,[(1-o)*self.length + o*g,o*self.length + (1-o)*g])
             
-    def __str__(self):
+    def __str__(self): # returns the grid position of the ship
         string = "ship's helm = [" + str(self.helm_pos[0]) + ", " + str(self.helm_pos[1]) + "]"
         return string
             
-    def draw(self): 
+    def draw(self): # draws a rectangle with the helm as one fixed corner using correct orientation
         o = self.orientation
         g = GRID_SIZE
         rect = Rect(self.helm_pos,[(1-o)*self.length + o*g,o*self.length + (1-o)*g])
@@ -86,7 +90,7 @@ class Ship:
         ships_inside = self.rect()
         return ships_inside.collidepoint(pos[0],pos[1])
         
-    def nset(self,n): # returns a list indicating position of ship with respect to a 10x10 grid
+    def nset(self,n): # returns a list indicating position of ship with respect to the 10x10 grid
         lset = set()
         for i in range(0,self.lilength):
             lset.add(n + i*10**self.orientation) 
@@ -225,7 +229,7 @@ canvas.fill((255,0,0))
 friendly_board = Board([10*GRID_SIZE,8*GRID_SIZE])
 enemy_board = Board([25*GRID_SIZE,8*GRID_SIZE])
 message = "B's Battleship Game"
-player_header = "Friendly Waters - place your boats here"
+player_header = "Friendly Waters - place your boats here, press <space> to flip ship"
 enemy_header = "Enemy Waters"
 #print (ship)
 friendly = Fleet()
